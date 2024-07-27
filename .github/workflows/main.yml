@@ -1,0 +1,41 @@
+name: update_posts
+on:
+  push:
+    branches:    
+      - main
+permissions: 
+  actions: write
+  contents: write
+  pages: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      USERNAME: ${{ secrets.USERNAME }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      HOST: ${{ secrets.HOST }}
+    steps:
+      - uses: actions/checkout@main # Checking out the repo
+      # 建立 pngquant 环境
+      - name: Install pngquant
+        run: sudo apt install -y pngquant
+      # 建立 Python 环境
+      - name: Install Python, pipenv and Pipfile packages
+        uses: palewire/install-python-pipenv-pipfile@v4
+        with:
+          python-version: 3.12
+        # 运行本仓库文件
+      - name: Post Article
+        run: pipenv run python main.py
+        # 把改动内容推送回 github 仓库
+      - name: Commit and push if changed   # 将 README.md 更新到仓库
+        run: |
+          git diff
+          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+          git add -A
+          git commit -m "Github Action auto Updated"
+          git push
