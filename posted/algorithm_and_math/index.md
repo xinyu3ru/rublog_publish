@@ -4,9 +4,11 @@ categories:
 - software
 date: 2024-09-06 20:05:52
 excerpt: 趁着大家都下班了，我们学习一下编程算法和数学。
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/4176
 image: images/banner.jpg
 og:
   image: images/banner.jpg
+slug: bian-cheng-xiang-xue-xi-yi-dian-suan-fa-he-shu-xue
 status: publish
 title: 【编程向】学习一点算法和数学
 ---

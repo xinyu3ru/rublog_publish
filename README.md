@@ -10,7 +10,9 @@ WordPress API 库来自于 [wordpress-markdown-blog-loader](https://github.com/b
 
 ---start---
 
-## 目录(2024年07月27日更新)
+## 目录(2024年09月06日更新)
+
+[【编程向】学习一点算法和数学](https://www.rxx0.com/software/bian-cheng-xiang-xue-xi-yi-dian-suan-fa-he-shu-xue.html)&emsp; &emsp; 发布时间： 2024-09-06-13:51
 
 [如何使用github actions 发布 markdown 文章到 WordPress 网站](https://www.rxx0.com/?p=4150)&emsp; &emsp; 发布时间： 2024-07-27-05:24
 
