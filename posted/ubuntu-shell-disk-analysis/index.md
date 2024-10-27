@@ -4,10 +4,13 @@ categories:
 - software
 date: 2024-10-30 12:27:00
 excerpt: Ubuntu 使用 shell 分析磁盘占用，推荐工具 ncdu  和 duf。
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/4195
 image: images/banner.png
+slug: ubuntu-shi-yong-shell-fen-xi-ci-pan-zhan-yong-1
 status: publish
 title: Ubuntu 使用 shell 分析磁盘占用1
 ---
+
 - [背景](#背景)
 - [ncdu 安装使用](#ncdu-安装使用)
 - [ncdu 示例](#ncdu-示例)

@@ -12,6 +12,10 @@ WordPress API 库来自于 [wordpress-markdown-blog-loader](https://github.com/b
 
 ## 目录(2024年10月27日更新)
 
+[Ubuntu 使用 shell 分析磁盘占用二](https://www.rxx0.com/?p=4198)&emsp; &emsp; 发布时间： 2024-10-27-11:38
+
+[Ubuntu 使用 shell 分析磁盘占用1](https://www.rxx0.com/?p=4195)&emsp; &emsp; 发布时间： 2024-10-27-11:37
+
 [西门子博途（TIA)V19 在 Windows 11 下使用常见问题解决办法](https://www.rxx0.com/?p=4190)&emsp; &emsp; 发布时间： 2024-10-27-01:40
 
 [西门子博途（TIA)V19 在 Windows 11 下安装问题解决办法](https://www.rxx0.com/?p=4183)&emsp; &emsp; 发布时间： 2024-10-27-01:40
