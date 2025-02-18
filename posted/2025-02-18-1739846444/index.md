@@ -1,13 +1,15 @@
 ---
+Tags: Grafana, xlsx
 author: xinyu2ru
 categories:
 - software
 date: 2025-02-18 10:40:44
 excerpt: 如何将任何 Grafana 可视化导出到 CSV 文件、Microsoft Excel 或 Google Sheets
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/4219
 image: images/banner.png
+slug: ru-he-jiang-ren-he-grafana-ke-shi-hua-dao-chu-dao-csv-wen-jian-microsoft-excel-huo-google-sheets
 status: publish
 title: 如何将任何 Grafana 可视化导出到 CSV 文件、Microsoft Excel 或 Google Sheets
-Tags: Grafana, xlsx
 ---
 
 ## 如何将任何 Grafana 可视化导出到 CSV 文件、Microsoft Excel 或 Google Sheets
@@ -83,4 +85,4 @@ _**如果这就是您所需要的，那么您就大功告成了！**_ 但是这
 
 ## 总结
 
-Grafana 在内部将您的数据作为一系列数据框来处理，无论这些数据来自何处或最初如何存储和查询。这意味着导出数据相当简单；我们只需将这些数据框转换为 CSV 文件，您就可以将其用于任何电子表格应用程序或任何其他软件。  
+Grafana 在内部将您的数据作为一系列数据框来处理，无论这些数据来自何处或最初如何存储和查询。这意味着导出数据相当简单；我们只需将这些数据框转换为 CSV 文件，您就可以将其用于任何电子表格应用程序或任何其他软件。
