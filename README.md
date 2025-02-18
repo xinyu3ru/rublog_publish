@@ -92,6 +92,8 @@ excerpt: 这里写文章的摘要内容，这段文字应该出现在文章摘�
 image: images/banner.jpg
 status: publish
 title: 这里写文章的标题
+focus-keywords: markdown upload wordpress
+tags: markdown upload wordpress
 ---
 
 ```
