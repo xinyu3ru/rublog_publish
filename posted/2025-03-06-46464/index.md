@@ -5,7 +5,9 @@ categories:
 - software
 date: 2025-03-06 16:35:40
 excerpt: Windows 用户可看！2025 年转投 Linux 必须知道的 10 件事
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/4230
 image: images/banner.png
+slug: windowsyong-hu-ke-kan-2025nian-zhuan-tou-linuxbi-xu-zhi-dao-de-10jian-shi
 status: publish
 title: Windows用户可看,2025年转投Linux必须知道的10件事
 ---
