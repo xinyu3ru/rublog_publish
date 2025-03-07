@@ -10,7 +10,9 @@ WordPress API 库来自于 [wordpress-markdown-blog-loader](https://github.com/b
 
 ---start---
 
-## 目录(2025年03月06日更新)
+## 目录(2025年03月07日更新)
+
+[🚀 ZSH：Bash的终极替代者！智能补全+插件生态+深度定制，开发者的效率神器！](https://www.rxx0.com/software/zsh-bashde-zhong-ji-ti-dai-zhe-zhi-neng-bu-quan-cha-jian-sheng-tai-shen-du-ding-zhi-kai-fa-zhe-de-xiao-lu-shen-qi.html)&emsp; &emsp; 发布时间： 2025-03-07-07:12
 
 [Windows用户可看,2025年转投Linux必须知道的10件事](https://www.rxx0.com/software/windowsyong-hu-ke-kan-2025nian-zhuan-tou-linuxbi-xu-zhi-dao-de-10jian-shi.html)&emsp; &emsp; 发布时间： 2025-03-06-13:55
 

@@ -1,13 +1,15 @@
 ---
+Tags: bash 插件 git
 author: xinyu2ru
 categories:
 - software
 date: 2025-03-07 08:40:37
-excerpt: 🚀 ZSH：Bash的终极替代者！智能补全+插件生态+深度定制，开发者的效率神器！
+excerpt: "\U0001F680 ZSH：Bash的终极替代者！智能补全+插件生态+深度定制，开发者的效率神器！"
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/4235
 image: images/banner.png
+slug: zsh-bashde-zhong-ji-ti-dai-zhe-zhi-neng-bu-quan-cha-jian-sheng-tai-shen-du-ding-zhi-kai-fa-zhe-de-xiao-lu-shen-qi
 status: publish
-title: 🚀 ZSH：Bash的终极替代者！智能补全+插件生态+深度定制，开发者的效率神器！
-Tags: bash 插件 git
+title: "\U0001F680 ZSH：Bash的终极替代者！智能补全+插件生态+深度定制，开发者的效率神器！"
 ---
 
 随着时间的推移，新的软件不断的出现，新的软件可能提供更好的体验，zsh 就是一款提供了更好体验的软件。ZSH（Z Shell）是一种基于Bash的增强型命令行shell，提供智能化的自动补全、高级交互特性、定制化能力，并且拥有强大的插件生态。
