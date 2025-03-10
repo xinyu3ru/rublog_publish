@@ -10,7 +10,9 @@ WordPress API 库来自于 [wordpress-markdown-blog-loader](https://github.com/b
 
 ---start---
 
-## 目录(2025年03月07日更新)
+## 目录(2025年03月10日更新)
+
+[PuTTY 控制台中的颜色 — 设置和配置颜色方案](https://www.rxx0.com/software/putty-kong-zhi-tai-zhong-de-yan-se-she-zhi-he-pei-zhi-yan-se-fang-an.html)&emsp; &emsp; 发布时间： 2025-03-10-02:16
 
 [🚀 ZSH：Bash的终极替代者！智能补全+插件生态+深度定制，开发者的效率神器！](https://www.rxx0.com/software/zsh-bashde-zhong-ji-ti-dai-zhe-zhi-neng-bu-quan-cha-jian-sheng-tai-shen-du-ding-zhi-kai-fa-zhe-de-xiao-lu-shen-qi.html)&emsp; &emsp; 发布时间： 2025-03-07-07:12
 

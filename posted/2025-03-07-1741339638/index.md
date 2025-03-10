@@ -1,13 +1,15 @@
 ---
+Tags: none
 author: xinyu2ru
 categories:
 - software
 date: 2025-03-09 17:27:18
 excerpt: PuTTY 控制台中的颜色 — 设置和配置颜色方案
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/4241
 image: images/banner.png
+slug: putty-kong-zhi-tai-zhong-de-yan-se-she-zhi-he-pei-zhi-yan-se-fang-an
 status: publish
 title: PuTTY 控制台中的颜色 — 设置和配置颜色方案
-Tags: none
 ---
 
 ## PuTTY  是什么？
