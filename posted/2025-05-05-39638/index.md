@@ -5,7 +5,9 @@ categories:
 - software
 date: 2025-05-05 12:22:58
 excerpt: 打工人急需的 11 个 pdf 电子发票工具和技巧
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/4246
 image: images/banner.png
+slug: da-gong-ren-ji-xu-de-11-ge-pdf-dian-zi-fa-piao-gong-ju-he-ji-qiao
 status: publish
 title: 打工人急需的 11 个 pdf 电子发票工具和技巧
 ---

@@ -10,7 +10,9 @@ WordPress API 库来自于 [wordpress-markdown-blog-loader](https://github.com/b
 
 ---start---
 
-## 目录(2025年03月10日更新)
+## 目录(2025年05月06日更新)
+
+[打工人急需的 11 个 pdf 电子发票工具和技巧](https://www.rxx0.com/software/da-gong-ren-ji-xu-de-11-ge-pdf-dian-zi-fa-piao-gong-ju-he-ji-qiao.html)&emsp; &emsp; 发布时间： 2025-05-06-01:03
 
 [PuTTY 控制台中的颜色 — 设置和配置颜色方案](https://www.rxx0.com/software/putty-kong-zhi-tai-zhong-de-yan-se-she-zhi-he-pei-zhi-yan-se-fang-an.html)&emsp; &emsp; 发布时间： 2025-03-10-02:16
 
