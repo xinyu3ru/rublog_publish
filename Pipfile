@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pillow = "*"
+python-slugify = "*"
+pytz = "*"
+markdown = "*"
+markdownify = "*"
+requests = "*"
+python-frontmatter = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.13"
