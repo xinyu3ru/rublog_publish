@@ -73,7 +73,7 @@ class WordpressEndpoint:
 class User(dict):
     def __init__(self, u):
         if u:
-        self.update(u)
+            self.update(u)
 
     @property
     def name(self):
