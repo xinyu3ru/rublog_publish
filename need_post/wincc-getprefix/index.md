@@ -10,7 +10,7 @@ og:
 status: publish
 title: 西门子 wincc 获取画面的前缀
 focus-keywords: wincc
-tags: wincc
+tags: none
 ---
 
 使用 Wincc 做画面的时候，有些画面可以复用，当使用复用画面的时候，wincc 通常是通过脚本添加前缀。
