@@ -247,12 +247,12 @@ class Wordpress(object):
         self._media: List[Medium] = {}
         self.headers = {
             "accept": "application/json",
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/605.1.15 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/605.1.15",
         }
         self.session = requests.Session()
 
     @property
-    def auth(self) -> (str, str):
+    def auth(self) -> (str, str): # type: ignore
         return (self.endpoint.username, self.endpoint.password)
 
     @property

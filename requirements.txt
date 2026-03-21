@@ -1,7 +1,0 @@
-pillow
-python-slugify
-pytz
-markdown
-markdownify
-requests
-python-frontmatter

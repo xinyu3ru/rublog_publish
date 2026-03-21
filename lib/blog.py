@@ -265,12 +265,11 @@ class Blog(object):
         return Path(self.dir).joinpath(self.og_image) if self.og_image else None
 
     def generate_og_image(self):
-        in_file = str(self.image_path)
-
+        # in_file = str(self.image_path)
         if not self.og_image:
             self.og_image = "images/banner.jpg"
-        out_file = str(self.og_image_path)
-        logging.info("generating new image in %s", out_file)
+        # out_file = str(self.og_image_path)
+        # logging.info("generating new image in %s", out_file)
         # blog = ImageGeneratorBlog(self.title, self.subtitle, self.author, self.email)
         # generate_og_image(
         #     blog,
@@ -401,7 +400,6 @@ class Blog(object):
             "content": self.rendered,
             "format": "standard",
             "status": self.status,
-            "author": author.id,
             "categories": [wp.get_category_id_by_name(c) for c in self.categories],
             "tags": [wp.get_tag_id_by_name(c) for c in self.tags],
             "acf": {"show_header_image": bool(self.image)},
@@ -416,9 +414,8 @@ class Blog(object):
             result["excerpt"] = markdown(
                 self.excerpt, extensions=["fenced_code", "attr_list"]
             )
-
-        metadesc = self.og_description if self.og_description else self.excerpt
-        logging.warning("facebook and twitter description, canonical url and focus keywords can not be set")
+        # metadesc = self.og_description if self.og_description else self.excerpt
+        # logging.warning("facebook and twitter description, canonical url and focus keywords can not be set")
         #result["meta"] = {
         #     "rank_math_facebook_description": metadesc,
         #     "rank_math_twitter_description": metadesc,
@@ -429,8 +426,8 @@ class Blog(object):
         # if self.focus_keywords:
         #     result["meta"]["rank_math_focus_keyword"] = ','.join(self.focus_keywords.split())
 
-        if self.focus_keywords:
-            result["meta"]["rank_math_focus_keyword"] = ','.join(self.focus_keywords.split())
+        # if self.focus_keywords:
+        #     result["meta"]["rank_math_focus_keyword"] = ','.join(self.focus_keywords.split())
 
         return result
 

@@ -4,13 +4,15 @@ categories:
 - software
 date: 2026-03-19 17:27:00
 excerpt: 西门子 wincc 获取画面的前缀
+focus-keywords: wincc
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/4278
 image: images/banner.jpg
 og:
   image: images/og-banner.jpg
+slug: xi-men-zi-wincc-huo-qu-hua-mian-de-qian-zhui
 status: publish
+tags: ''
 title: 西门子 wincc 获取画面的前缀
-focus-keywords: wincc
-tags: none
 ---
 
 使用 Wincc 做画面的时候，有些画面可以复用，当使用复用画面的时候，wincc 通常是通过脚本添加前缀。

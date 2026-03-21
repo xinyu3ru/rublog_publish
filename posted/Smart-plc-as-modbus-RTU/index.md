@@ -4,13 +4,17 @@ categories:
 - software
 date: 2026-03-19 15:22:00
 excerpt: 西门子 1200 PLC 做主机，SMART PLC 做 Modbus RTU 接口远程读写串口
+focus-keywords: PLC Modbus
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/4297
 image: images/banner.jpg
 og:
   image: images/og-banner.jpg
+slug: xi-men-zi-1200-plc-zuo-zhu-ji-smart-plc-zuo-modbus-rtu-jie-kou-yuan-cheng-du-xie-chuan-kou
 status: publish
+tags:
+- plc
+- modbus
 title: 西门子 1200 PLC 做主机，SMART PLC 做 Modbus RTU 接口远程读写串口
-focus-keywords: PLC Modbus
-tags: none
 ---
 
 项目最开始的设计方案是使用西门子 1200 PLC 做主控逻辑，西门子 SMART SR30 PLC 做通讯，自带串口轮询 6~12 个通讯阀门，挂 SB CM01 通讯板通讯 CDU 主机。

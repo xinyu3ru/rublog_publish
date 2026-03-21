@@ -76,11 +76,11 @@ def convert(title, html_body):
         blocks.append(_wrap_in_gutenberg_comments(element))
 
     title = title.replace('"', '\\"')
-    hero_block = f'<!-- wp:xebia/blog-hero {{"blogHeroTitle":"{title}","lock":{{"move":true,"remove":true}}}} /-->\n\n'
-    content_section_start = "<!-- wp:xebia/content-section -->\n"
-    content_section_end = "\n<!-- /wp:xebia/content-section -->"
+    hero_block = f'<!-- wp:blog-hero {{"blogHeroTitle":"{title}","lock":{{"move":true,"remove":true}}}} /-->\n\n'
+    content_section_start = "<!-- wp:content-section -->\n"
+    content_section_end = "\n<!-- /wp:content-section -->"
     content_section = (
-        '<div class="wp-block-xebia-content-section">' + "\n".join(blocks) + "</div>"
+        '<div class="wp-block-content-section">' + "\n".join(blocks) + "</div>"
     )
 
     return hero_block + content_section_start + content_section + content_section_end
