@@ -5,7 +5,7 @@ on:
       - main
     paths:
       - 'README.md'
-      - 'need_posts/**'
+      - 'need_post/**'
 permissions: 
   actions: write
   contents: write
