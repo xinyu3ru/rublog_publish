@@ -6,8 +6,8 @@ on:
     paths:
       - 'README.md'
       - 'need_post/**'
-permissions: 
-  actions: write
+  workflow_dispatch:
+permissions:
   contents: write
   pages: write
 jobs:
@@ -21,15 +21,19 @@ jobs:
       PASSWORD: ${{ secrets.PASSWORD }}
       HOST: ${{ secrets.HOST }}
     steps:
-      - uses: actions/checkout@v6 # Checking out the repo
+      - uses: actions/checkout@v6.0.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+          fetch-depth: 0
       # 建立 pngquant 环境
       - name: Install pngquant
         run: sudo apt install -y pngquant
       # 建立 Python 环境
       - name: Install Python, pipenv and Pipfile packages
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v6.2.0
         with:
-          python-version: '3.13' 
+          python-version: '3.13'
           cache: 'pip' # caching pip dependencies
       - name: Install pipenv
         run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
@@ -41,9 +45,12 @@ jobs:
         # 把改动内容推送回 github 仓库
       - name: Commit and push if changed   # 将 README.md 更新到仓库
         run: |
-          git diff
-          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
-          git config --global user.name "${{ github.actor }}"
-          git add -A
-          git commit -m "Github Action auto Updated"
-          git push
+          if [ -n "$(git status --porcelain)" ]; then
+            git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+            git config --global user.name "${{ github.actor }}"
+            git add -A
+            git commit -m "Github Action auto Updated"
+            git push
+          else
+            echo "No changes to commit"
+          fi
