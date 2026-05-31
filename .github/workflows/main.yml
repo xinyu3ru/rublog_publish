@@ -1,11 +1,12 @@
 name: update_posts
 on:
   push:
-    branches:    
+    branches:
       - main
     paths:
       - 'README.md'
       - 'need_post/**'
+      - '.github/workflows/main.yml'
   workflow_dispatch:
 permissions:
   contents: write
