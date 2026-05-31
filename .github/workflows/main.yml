@@ -30,12 +30,22 @@ jobs:
       # 建立 pngquant 环境
       - name: Install pngquant
         run: sudo apt install -y pngquant
-      # 建立 Python 环境
-      - name: Install Python, pipenv and Pipfile packages
+      # 建立 Python 环境并缓存依赖
+      - name: Setup Python
         uses: actions/setup-python@v6.2.0
         with:
           python-version: '3.13'
-          cache: 'pip' # caching pip dependencies
+          cache: 'pip'
+      - name: Cache pip and uv artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.cache/uv
+          key: ${{ runner.os }}-pip-uv-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-uv-${{ matrix.python-version }}-
+            ${{ runner.os }}-pip-uv-
       - name: Install uv and project dependencies
         run: |
           python -m pip install --upgrade pip
