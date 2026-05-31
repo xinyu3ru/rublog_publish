@@ -1,11 +1,13 @@
 ---
-Tags: 
+Tags: null
 author: xinyu2ru
 categories:
 - software
-date: 2026-05-14 9:22:58
+date: 2026-05-14 09:22:58
 excerpt: Modbus-RTU通讯中功能码和5位数字地址对应关系
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/4301
 image: images/banner.png
+slug: modbus-rtutong-xun-zhong
 status: publish
 title: Modbus-RTU通讯中功能码和5位数字地址对应关系
 ---
