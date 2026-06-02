@@ -5,7 +5,9 @@ categories:
 - software
 date: 2026-06-02 08:22:00
 excerpt: 在使用 AI 编程过程中词元的燃烧速度
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/4304
 image: images/banner.png
+slug: zai-shi-yong-ai-bian-chen
 status: publish
 title: 在使用 AI 编程过程中词元的燃烧速度
 ---

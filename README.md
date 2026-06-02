@@ -10,7 +10,9 @@ WordPress API 库来自于 [wordpress-markdown-blog-loader](https://github.com/b
 
 ---start---
 
-## 目录(2026年05月31日更新)
+## 目录(2026年06月02日更新)
+
+[在使用 AI 编程过程中词元的燃烧速度](https://www.rxx0.com/software/zai-shi-yong-ai-bian-chen.html)&emsp; &emsp; 发布时间： 2026-06-02-01:08
 
 [Modbus-RTU通讯中功能码和5位数字地址对应关系](https://www.rxx0.com/software/modbus-rtutong-xun-zhong.html)&emsp; &emsp; 发布时间： 2026-05-31-13:21
 
