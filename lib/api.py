@@ -299,16 +299,19 @@ class Wordpress(object):
     def users(self, query: dict = None) -> List["User"]:
         return list(map(lambda u: User(u), self.get_all("users", query)))
 
-    def get_user_by_id(self, resource_id: int) -> "User":
+    def get_user_by_id(self, resource_id: Union[int, str]) -> "User":
         return User(self.get("users", resource_id))
 
     def get_unique_user_by_name(
         self, name: str, email: Optional[str], author_id: Optional[str]
     ) -> "User":
 
-        user = self.get_user_by_id("me")
-        if user and user.name == name:
-            return user
+        try:
+            user = self.get_user_by_id("me")
+            if user and user.name == name:
+                return user
+        except (PermissionDenied, Exception):
+            logging.warning("Unable to get current user info, searching by name")
 
         users = []
         try:
