@@ -398,12 +398,12 @@ class Blog(object):
             "content": self.rendered,
             "format": "standard",
             "status": self.status,
-            "categories": [wp.get_category_id_by_name(c) for c in self.categories],
-            "tags": [wp.get_tag_id_by_name(c) for c in self.tags],
+            "categories": [wp.get_category_id_by_name(c) for c in (self.categories or [])],
+            "tags": [wp.get_tag_id_by_name(c) for c in (self.tags or [])],
             "acf": {"show_header_image": bool(self.image)},
-            "industries_taxonomy": [wp.get_industry_by_name(c) for c in self.industries],
-            "partners_taxonomy": [wp.get_partner_by_name(c) for c in self.partners],
-            "capabilities": [wp.get_capabilities_by_name(c) for c in self.capabilities],
+            "industries_taxonomy": [wp.get_industry_by_name(c) for c in (self.industries or [])],
+            "partners_taxonomy": [wp.get_partner_by_name(c) for c in (self.partners or [])],
+            "capabilities": [wp.get_capabilities_by_name(c) for c in (self.capabilities or [])],
         }
         if self.permalink_template:
             result["permalink_template"] = self.permalink_template
