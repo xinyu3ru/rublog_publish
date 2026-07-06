@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'need_post/**'
+      - 'lib/**'
       - '.github/workflows/main.yml'
   workflow_dispatch:
 
