@@ -262,6 +262,12 @@ class Wordpress(object):
         return (self.endpoint.username, self.endpoint.password)
 
     @property
+    def basic_auth_header(self) -> str:
+        import base64
+        credentials = f"{self.endpoint.username}:{self.endpoint.password}"
+        return f"Basic {base64.b64encode(credentials.encode()).decode()}"
+
+    @property
     def url(self) -> str:
         return self.endpoint.url
 
@@ -276,19 +282,40 @@ class Wordpress(object):
         params["per_page"] = "100"
         page = 1
         total_pages = 1
+        current_auth = self.auth
+        current_headers = self.headers
+        
         while page <= total_pages:
             params["page"] = str(page)
             response = self.session.get(
                 f"{self.url}/{resource}",
-                auth=self.auth,
+                auth=current_auth,
                 params=params,
-                headers=self.headers,
+                headers=current_headers,
             )
             if response.status_code == 200:
                 for object in response.json():
                     yield object
                 total_pages = int(response.headers["X-WP-TotalPages"])
                 page = page + 1
+            elif response.status_code == 401 and current_auth is not None:
+                headers_with_auth = self.headers.copy()
+                headers_with_auth["Authorization"] = self.basic_auth_header
+                response = self.session.get(
+                    f"{self.url}/{resource}",
+                    headers=headers_with_auth,
+                    params=params,
+                )
+                if response.status_code == 200:
+                    current_auth = None
+                    current_headers = headers_with_auth
+                    for object in response.json():
+                        yield object
+                    total_pages = int(response.headers["X-WP-TotalPages"])
+                    page = page + 1
+                else:
+                    msg = f"failed to get all {resource}: {response.status_code}, {response.text}"
+                    raise PermissionDenied(msg)
             else:
                 msg = f"failed to get all {resource}: {response.status_code}, {response.text}"
                 if response.status_code in [401, 403]:
@@ -561,8 +588,21 @@ class Wordpress(object):
         response = self.session.get(
             self.normalize_url(url), auth=self.auth, headers=self.headers, params=params
         )
+        
         if response.status_code == 200:
             return response.json()
+        elif response.status_code == 401:
+            headers_with_auth = self.headers.copy()
+            headers_with_auth["Authorization"] = self.basic_auth_header
+            response = self.session.get(
+                self.normalize_url(url), headers=headers_with_auth, params=params
+            )
+            if response.status_code == 200:
+                return response.json()
+            elif response.status_code == 404:
+                return None
+            else:
+                raise Exception(response.text)
         elif response.status_code == 404:
             return None
         else:
