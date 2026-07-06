@@ -126,7 +126,7 @@ class Post(dict):
         return self["slug"] if self["slug"] else self.get("generated_slug")
 
     @property
-    def post_id(self) -> id:
+    def post_id(self) -> int:
         return int(self["id"])
 
     @property
@@ -240,11 +240,17 @@ class PermissionDenied(Exception):
         super().__init__(msg)
 
 
+class ApiError(Exception):
+    def __init__(self, msg, status_code=None):
+        super().__init__(msg)
+        self.status_code = status_code
+
+
 class Wordpress(object):
     def __init__(self, host: Optional[str] = None):
         self.endpoint = WordpressEndpoint.load(host)
 
-        self._media: List[Medium] = {}
+        self._media: Dict[str, Medium] = {}
         self.headers = {
             "accept": "application/json",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/605.1.15 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/605.1.15",
@@ -252,7 +258,7 @@ class Wordpress(object):
         self.session = requests.Session()
 
     @property
-    def auth(self) -> (str, str): # type: ignore
+    def auth(self) -> tuple[str, str]:
         return (self.endpoint.username, self.endpoint.password)
 
     @property
@@ -285,13 +291,10 @@ class Wordpress(object):
                 page = page + 1
             else:
                 msg = f"failed to get all {resource}: {response.status_code}, {response.text}"
-                if response.status_code in [401,403]:
+                if response.status_code in [401, 403]:
                     raise PermissionDenied(msg)
                 else:
-                    print(msg)
-                    exit(1)
-
-        return None
+                    raise ApiError(msg, response.status_code)
 
     def users(self, query: dict = None) -> List["User"]:
         return list(map(lambda u: User(u), self.get_all("users", query)))
@@ -355,20 +358,27 @@ class Wordpress(object):
             yield Post(p)
 
     def get_post_by_slug(self, slug: str) -> Optional["Post"]:
-        return next(
-            filter(
-                lambda p: p.slug == slug,
-                (
-                    map(
-                        lambda u: Post(u),
-                        self.get_all(
-                            "posts", {"status": "draft,publish,pending", "slug": slug}
+        for status in ["draft,publish,pending", "publish"]:
+            try:
+                result = next(
+                    filter(
+                        lambda p: p.slug == slug,
+                        (
+                            map(
+                                lambda u: Post(u),
+                                self.get_all(
+                                    "posts", {"status": status, "slug": slug}
+                                ),
+                            )
                         ),
-                    )
-                ),
-            ),
-            None,
-        )
+                    ),
+                    None,
+                )
+                if result:
+                    return result
+            except ApiError:
+                continue
+        return None
 
     def media(self) -> List[Medium]:
         if not self._media:
@@ -383,7 +393,7 @@ class Wordpress(object):
     @property
     @cache
     def categories_by_id(self) -> Dict[int, str]:
-        return {id: slug for slug,id in self.categories.items()}
+        return {id: slug for slug, id in self.categories.items()}
 
     @property
     @cache
@@ -392,8 +402,8 @@ class Wordpress(object):
 
     @property
     @cache
-    def industries_taxonomy_by_id(self) -> Dict[str, int]:
-        return  {id: slug for slug, id in self.industries_taxonomy.items()}
+    def industries_taxonomy_by_id(self) -> Dict[int, str]:
+        return {id: slug for slug, id in self.industries_taxonomy.items()}
 
     @property
     @cache
@@ -402,8 +412,8 @@ class Wordpress(object):
 
     @property
     @cache
-    def partners_taxonomy_by_id(self) -> Dict[str, int]:
-        return  {id: slug for slug, id in self.partners_taxonomy.items()}
+    def partners_taxonomy_by_id(self) -> Dict[int, str]:
+        return {id: slug for slug, id in self.partners_taxonomy.items()}
 
     @property
     @cache
@@ -412,9 +422,8 @@ class Wordpress(object):
 
     @property
     @cache
-    def capabilities_by_id(self) -> Dict[str, int]:
-        return  {id: slug for slug, id in self.capabilities.items()}
-
+    def capabilities_by_id(self) -> Dict[int, str]:
+        return {id: slug for slug, id in self.capabilities.items()}
 
     @property
     @cache

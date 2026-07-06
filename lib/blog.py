@@ -30,7 +30,7 @@ class Blog(object):
         self.dir: Path = None
         self.path: Path = None
         self.blog: frontmatter.Post = frontmatter.Post(content="")
-        self.uploaded_images: dict[str, Media] = {}
+        self.uploaded_images: dict[str, Medium] = {}
         self.markdown_image_pattern = re.compile(
             r'\!\[(?P<alt_text>[^]]*)\]\((?P<url>.*?)(?P<caption>\s*"[^"]*?")?\)'
         )
@@ -350,15 +350,13 @@ class Blog(object):
         url = urlparse(url) if isinstance(url, str) else url
         logging.info("downloading %s as %s", url.geturl(), path.name)
         raw = wordpress.get_media(url.geturl())
-        os.makedirs(path.parent, exist_ok=True)
-        with open(path, "wb") as file:
-            file.write(raw)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(raw)
 
     def download_remote_images(self, wp: Wordpress, slug: str = ""):
         self.downloaded_images: dict[str, Path] = {}
         for url in self.remote_image_references(wp.endpoint):
             name = Path(url.path).name.removeprefix(slug)
-            name = name.removeprefix(slug)
             path = Path("images").joinpath(name)
             self.download_media(url, wp, Path(self.dir).joinpath(path))
             self.downloaded_images[url.geturl()] = path

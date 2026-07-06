@@ -1,138 +1,241 @@
 [
   {
+    "title": "在使用 AI 编程过程中词元的燃烧速度",
+    "url": "https://www.rxx0.com/software/zai-shi-yong-ai-bian-chen.html",
+    "date": "2026-06-02",
+    "datetime": "2026-06-02-01:08",
+    "slug": "https-www-rxx0-com-software-zai-shi-yong-ai-bian-chen-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "ai"
+    ]
+  },
+  {
     "title": "Modbus-RTU通讯中功能码和5位数字地址对应关系",
     "url": "https://www.rxx0.com/software/modbus-rtutong-xun-zhong.html",
-    "date": "2026-05-31-13",
-    "datetime": "2026-05-31-13",
-    "slug": "www-rxx0-com-software-modbus-rtutong-xun-zhong-html",
-    "tags": []
+    "date": "2026-05-31",
+    "datetime": "2026-05-31-13:21",
+    "slug": "https-www-rxx0-com-software-modbus-rtutong-xun-zhong-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "modbus"
+    ]
   },
   {
     "title": "西门子 1200 PLC 做主机，SMART PLC 做 Modbus RTU 接口远程读写串口",
     "url": "https://www.rxx0.com/software/xi-men-zi-1200-plc-zuo-zhu-ji-smart-plc-zuo-modbus-rtu-jie-kou-yuan-cheng-du-xie-chuan-kou.html",
-    "date": "2026-03-20-17",
-    "datetime": "2026-03-20-17",
-    "slug": "www-rxx0-com-software-xi-men-zi-1200-plc-zuo-zhu-ji-smart-plc-zuo-modbus-rtu-jie-kou-yuan-cheng-du-xie-chuan-kou-html",
-    "tags": []
+    "date": "2026-03-20",
+    "datetime": "2026-03-20-17:33",
+    "slug": "https-www-rxx0-com-software-xi-men-zi-1200-plc-zuo-zhu-ji-smart-plc-zuo-modbus-rtu-jie-kou-yuan-cheng-du-xie-chuan-kou-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "plc",
+      "modbus"
+    ]
   },
   {
     "title": "西门子 wincc 获取画面的前缀",
     "url": "https://www.rxx0.com/software/xi-men-zi-wincc-huo-qu-hua-mian-de-qian-zhui.html",
-    "date": "2026-03-20-16",
-    "datetime": "2026-03-20-16",
-    "slug": "www-rxx0-com-software-xi-men-zi-wincc-huo-qu-hua-mian-de-qian-zhui-html",
-    "tags": []
+    "date": "2026-03-20",
+    "datetime": "2026-03-20-16:45",
+    "slug": "https-www-rxx0-com-software-xi-men-zi-wincc-huo-qu-hua-mian-de-qian-zhui-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "plc",
+      "windows"
+    ]
   },
   {
     "title": "打工人急需的 11 个 pdf 电子发票工具和技巧",
     "url": "https://www.rxx0.com/software/da-gong-ren-ji-xu-de-11-ge-pdf-dian-zi-fa-piao-gong-ju-he-ji-qiao.html",
-    "date": "2025-05-06-01",
-    "datetime": "2025-05-06-01",
-    "slug": "www-rxx0-com-software-da-gong-ren-ji-xu-de-11-ge-pdf-dian-zi-fa-piao-gong-ju-he-ji-qiao-html",
-    "tags": []
+    "date": "2025-05-06",
+    "datetime": "2025-05-06-01:03",
+    "slug": "https-www-rxx0-com-software-da-gong-ren-ji-xu-de-11-ge-pdf-dian-zi-fa-piao-gong-ju-he-ji-qiao-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "tools"
+    ]
   },
   {
     "title": "PuTTY 控制台中的颜色 — 设置和配置颜色方案",
     "url": "https://www.rxx0.com/software/putty-kong-zhi-tai-zhong-de-yan-se-she-zhi-he-pei-zhi-yan-se-fang-an.html",
-    "date": "2025-03-10-02",
-    "datetime": "2025-03-10-02",
-    "slug": "www-rxx0-com-software-putty-kong-zhi-tai-zhong-de-yan-se-she-zhi-he-pei-zhi-yan-se-fang-an-html",
-    "tags": []
+    "date": "2025-03-10",
+    "datetime": "2025-03-10-02:16",
+    "slug": "https-www-rxx0-com-software-putty-kong-zhi-tai-zhong-de-yan-se-she-zhi-he-pei-zhi-yan-se-fang-an-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "tools"
+    ]
   },
   {
     "title": "🚀 ZSH：Bash的终极替代者！智能补全+插件生态+深度定制，开发者的效率神器！",
     "url": "https://www.rxx0.com/software/zsh-bashde-zhong-ji-ti-dai-zhe-zhi-neng-bu-quan-cha-jian-sheng-tai-shen-du-ding-zhi-kai-fa-zhe-de-xiao-lu-shen-qi.html",
-    "date": "2025-03-07-07",
-    "datetime": "2025-03-07-07",
-    "slug": "www-rxx0-com-software-zsh-bashde-zhong-ji-ti-dai-zhe-zhi-neng-bu-quan-cha-jian-sheng-tai-shen-du-ding-zhi-kai-fa-zhe-de-xiao-lu-shen-qi-html",
-    "tags": []
+    "date": "2025-03-07",
+    "datetime": "2025-03-07-07:12",
+    "slug": "https-www-rxx0-com-software-zsh-bashde-zhong-ji-ti-dai-zhe-zhi-neng-bu-quan-cha-jian-sheng-tai-shen-du-ding-zhi-kai-fa-zhe-de-xiao-lu-shen-qi-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "tools"
+    ]
   },
   {
     "title": "Windows用户可看,2025年转投Linux必须知道的10件事",
     "url": "https://www.rxx0.com/software/windowsyong-hu-ke-kan-2025nian-zhuan-tou-linuxbi-xu-zhi-dao-de-10jian-shi.html",
-    "date": "2025-03-06-13",
-    "datetime": "2025-03-06-13",
-    "slug": "www-rxx0-com-software-windowsyong-hu-ke-kan-2025nian-zhuan-tou-linuxbi-xu-zhi-dao-de-10jian-shi-html",
-    "tags": []
+    "date": "2025-03-06",
+    "datetime": "2025-03-06-13:55",
+    "slug": "https-www-rxx0-com-software-windowsyong-hu-ke-kan-2025nian-zhuan-tou-linuxbi-xu-zhi-dao-de-10jian-shi-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "linux",
+      "windows"
+    ]
   },
   {
     "title": "如何将任何 Grafana 可视化导出到 CSV 文件、Microsoft Excel 或 Google Sheets",
     "url": "https://www.rxx0.com/software/ru-he-jiang-ren-he-grafana-ke-shi-hua-dao-chu-dao-csv-wen-jian-microsoft-excel-huo-google-sheets.html",
-    "date": "2025-02-18-03",
-    "datetime": "2025-02-18-03",
-    "slug": "www-rxx0-com-software-ru-he-jiang-ren-he-grafana-ke-shi-hua-dao-chu-dao-csv-wen-jian-microsoft-excel-huo-google-sheets-html",
-    "tags": []
+    "date": "2025-02-18",
+    "datetime": "2025-02-18-03:03",
+    "slug": "https-www-rxx0-com-software-ru-he-jiang-ren-he-grafana-ke-shi-hua-dao-chu-dao-csv-wen-jian-microsoft-excel-huo-google-sheets-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "network"
+    ]
   },
   {
     "title": "Ubuntu 使用 shell 分析磁盘占用二",
     "url": "https://www.rxx0.com/?p=4198",
-    "date": "2024-10-27-11",
-    "datetime": "2024-10-27-11",
-    "slug": "www-rxx0-com-p-4198",
-    "tags": []
+    "date": "2024-10-27",
+    "datetime": "2024-10-27-11:38",
+    "slug": "https-www-rxx0-com-p-4198",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "linux"
+    ]
   },
   {
     "title": "Ubuntu 使用 shell 分析磁盘占用1",
     "url": "https://www.rxx0.com/?p=4195",
-    "date": "2024-10-27-11",
-    "datetime": "2024-10-27-11",
-    "slug": "www-rxx0-com-p-4195",
-    "tags": []
+    "date": "2024-10-27",
+    "datetime": "2024-10-27-11:37",
+    "slug": "https-www-rxx0-com-p-4195",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "linux"
+    ]
   },
   {
     "title": "西门子博途（TIA)V19 在 Windows 11 下使用常见问题解决办法",
     "url": "https://www.rxx0.com/?p=4190",
-    "date": "2024-10-27-01",
-    "datetime": "2024-10-27-01",
-    "slug": "www-rxx0-com-p-4190",
-    "tags": []
+    "date": "2024-10-27",
+    "datetime": "2024-10-27-01:40",
+    "slug": "https-www-rxx0-com-p-4190",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "plc",
+      "windows"
+    ]
   },
   {
     "title": "西门子博途（TIA)V19 在 Windows 11 下安装问题解决办法",
     "url": "https://www.rxx0.com/?p=4183",
-    "date": "2024-10-27-01",
-    "datetime": "2024-10-27-01",
-    "slug": "www-rxx0-com-p-4183",
-    "tags": []
+    "date": "2024-10-27",
+    "datetime": "2024-10-27-01:40",
+    "slug": "https-www-rxx0-com-p-4183",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "plc",
+      "windows"
+    ]
   },
   {
     "title": "【编程向】学习一点算法和数学",
     "url": "https://www.rxx0.com/software/bian-cheng-xiang-xue-xi-yi-dian-suan-fa-he-shu-xue.html",
-    "date": "2024-09-06-13",
-    "datetime": "2024-09-06-13",
-    "slug": "www-rxx0-com-software-bian-cheng-xiang-xue-xi-yi-dian-suan-fa-he-shu-xue-html",
-    "tags": []
+    "date": "2024-09-06",
+    "datetime": "2024-09-06-13:51",
+    "slug": "https-www-rxx0-com-software-bian-cheng-xiang-xue-xi-yi-dian-suan-fa-he-shu-xue-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "ai"
+    ]
   },
   {
     "title": "如何使用github actions 发布 markdown 文章到 WordPress 网站",
     "url": "https://www.rxx0.com/?p=4150",
-    "date": "2024-07-27-05",
-    "datetime": "2024-07-27-05",
-    "slug": "www-rxx0-com-p-4150",
-    "tags": []
+    "date": "2024-07-27",
+    "datetime": "2024-07-27-05:24",
+    "slug": "https-www-rxx0-com-p-4150",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "uncategorized"
+    ]
   },
   {
     "title": "使用 act 调试 github actions 技巧",
     "url": "https://www.rxx0.com/software/diao-shi-github-actions-de-4-chong-gong-ju.html",
-    "date": "2024-07-27-04",
-    "datetime": "2024-07-27-04",
-    "slug": "www-rxx0-com-software-diao-shi-github-actions-de-4-chong-gong-ju-html",
-    "tags": []
+    "date": "2024-07-27",
+    "datetime": "2024-07-27-04:55",
+    "slug": "https-www-rxx0-com-software-diao-shi-github-actions-de-4-chong-gong-ju-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "uncategorized"
+    ]
   },
   {
     "title": "两种方法解决 sourcetree 通过 ssh 连接 github Permission denied (publickey)问题",
     "url": "https://www.rxx0.com/software/liang-chong-fang-fa-jie-jue-sourcetree-tong-guo-ssh-lian-jie-github-permission-denied-publickey-wen-ti.html",
-    "date": "2024-07-26-10",
-    "datetime": "2024-07-26-10",
-    "slug": "www-rxx0-com-software-liang-chong-fang-fa-jie-jue-sourcetree-tong-guo-ssh-lian-jie-github-permission-denied-publickey-wen-ti-html",
-    "tags": []
+    "date": "2024-07-26",
+    "datetime": "2024-07-26-10:58",
+    "slug": "https-www-rxx0-com-software-liang-chong-fang-fa-jie-jue-sourcetree-tong-guo-ssh-lian-jie-github-permission-denied-publickey-wen-ti-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "network"
+    ]
   },
   {
     "title": "测试 python & markdown 自动发布文章",
     "url": "https://www.rxx0.com/software/test-python-and-markdown-to-automatically-publish-articles.html",
-    "date": "2024-07-24-16",
-    "datetime": "2024-07-24-16",
-    "slug": "www-rxx0-com-software-test-python-and-markdown-to-automatically-publish-articles-html",
-    "tags": []
+    "date": "2024-07-24",
+    "datetime": "2024-07-24-16:10",
+    "slug": "https-www-rxx0-com-software-test-python-and-markdown-to-automatically-publish-articles-html",
+    "categories": [
+      "software"
+    ],
+    "tags": [
+      "uncategorized"
+    ]
   }
 ]

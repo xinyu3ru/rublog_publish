@@ -7,75 +7,59 @@ import logging
 import os
 import subprocess
 import threading
+from typing import List
 
 from PIL import Image
 
 from lib.util import convert_mb_kb, is_jpg_file, is_png_file
 
-def compress_pic(path_list):
-    # 压缩线程数组
-    threads = []
-    # 当前路径下所有的图片加入压缩线程
-    for childFile in path_list:
-    # 创建压缩线程
-        compressThread = CompressThread(childFile)
-        compressThread.start()
-        threads.append(compressThread) # type: ignore
-    # 开始遍历执行压缩线程
-    for thread in threads:
-        thread.join()
 
-def compress_jpg(path, width=720,quality=85):
+def compress_jpg(path: str, width: int = 720, quality: int = 85) -> None:
+    byteSizeBefore = os.path.getsize(path)
     img: Image.Image = Image.open(path)
     w, h = img.size
-    byteSizeBefore = len(img.fp.read())
     if w > width:
-        h = int(h*width/w)
+        h = int(h * width / w)
         w = width
-        logging.info(f"图片宽度超过 { width } px,调整为{ w }x{ h } px。")
-    else:
-        w = int(w)
-        h = int(h)
-    img = img.resize((w,h), Image.LANCZOS)
+        logging.info(f"图片宽度超过 {width} px,调整为{w}x{h} px。")
+    img = img.resize((w, h), Image.LANCZOS)
     img.save(path, quality=quality, optimize=True)
     byteSizeAfter = os.path.getsize(path)
-    logging.info(f"{ path } , 压缩前：, { str(convert_mb_kb(byteSizeBefore)) }, 压缩后：, { str(convert_mb_kb(byteSizeAfter)) }。")
+    logging.info(f"{path} , 压缩前：{convert_mb_kb(byteSizeBefore)}, 压缩后：{convert_mb_kb(byteSizeAfter)}。")
 
-def compress_png(path):
+
+def compress_png(path: str) -> None:
     try:
-        cmd = "pngquant 256 --quality=65-80 --skip-if-larger --force --ext .png " + path
-        subprocess.run(cmd, shell=True)
-    except subprocess.CalledProcessError:
-        if subprocess.run("pngquant --version", shell=True, check=True):
-            logging.info("\n未检测到pngquant命令行环境，请参照pngquant官网搭建命令行环境：https://pngquant.org/")
+        result = subprocess.run(
+            ["pngquant", "256", "--quality=65-80", "--skip-if-larger", "--force", "--ext", ".png", path],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+    except FileNotFoundError:
+        logging.error("未检测到pngquant命令行环境，请参照pngquant官网搭建命令行环境：https://pngquant.org/")
+    except subprocess.CalledProcessError as e:
+        logging.error(f"压缩PNG失败 {path}: {e.stderr}")
 
-# 压缩线程（同步压缩）
-class CompressThread(threading.Thread):
-    # 构造方法
-    def __init__(self, compressPath) -> None:
-        threading.Thread.__init__(self)
-        self.threadLock = threading.Lock()
-        self.path = compressPath
 
-    # 运行方法
-    def run(self) -> None:
-        logging.info(f"\n线程开始运行，压缩图片路径为：{ self.path }")
-        # 获得锁
-        self.threadLock.acquire() # type: ignore
-        if is_jpg_file(self.path):
-            compress_jpg(self.path)
-        elif is_png_file(self.path):
-            compress_png(self.path)
-        else:
-            pass
-        # # 重命名后缀
-        # if self.extension == 'jpg' or self.extension == 'jpeg':
-        #     os.remove(self.path)
-        #     os.rename(os.path.join(self.root, self.compressFile + ".png"),
-        #               os.path.join(self.root, self.compressFile))
-        # 释放锁
-        self.threadLock.release() # type: ignore
-        logging.info(f"\n线程结束运行，压缩图片路径为：{ self.path }")
+def _compress_image(path: str) -> None:
+    logging.info(f"开始压缩图片路径：{path}")
+    if is_jpg_file(path):
+        compress_jpg(path)
+    elif is_png_file(path):
+        compress_png(path)
+    logging.info(f"结束压缩图片路径：{path}")
+
+
+def compress_pic(path_list: List[str]) -> None:
+    threads = []
+    for filepath in path_list:
+        thread = threading.Thread(target=_compress_image, args=(filepath,))
+        thread.start()
+        threads.append(thread)
+    
+    for thread in threads:
+        thread.join()
 
 
 

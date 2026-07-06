@@ -110,3 +110,6 @@ ENV/
 
 
 launch.json
+
+# Astro build artifacts
+.astro/

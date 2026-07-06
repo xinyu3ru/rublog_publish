@@ -51,25 +51,22 @@ def move_to_work_folder(cur_path, work_path):
     if cur_path != work_path:
         os.rmdir(cur_path)
 
-def is_jpg_file(x):
-    return any(x.endswith(extension)
-               for extension in ['.jpg', '.JPG', 'Jpg', 'Jpeg', 'JPEG', 'jpeg',
-                                 '.bmp', '.BMP', '.Bmp'])
+JPG_EXTENSIONS = {'.jpg', '.jpeg', '.bmp'}
+PNG_EXTENSIONS = {'.png'}
 
-def is_png_file(x):
-    return any(x.endswith(extension)
-               for extension in ['.png', '.PNG', 'Png', 'PNg', 'pNG'])
+def is_jpg_file(x: str) -> bool:
+    return os.path.splitext(x)[1].lower() in JPG_EXTENSIONS
 
-def convert_mb_kb(bytesize):
-    """
-    把byte长度转换成KB,MB
-    """
-    if bytesize > 0:
-        bytesize = bytesize / 1024
-        if bytesize < 1024:
-            return "%.fKB" % bytesize
-        else:
-            return "%.2fMB" % (bytesize / 1024)    
+def is_png_file(x: str) -> bool:
+    return os.path.splitext(x)[1].lower() in PNG_EXTENSIONS
+
+def convert_mb_kb(bytesize: int) -> str:
+    if bytesize <= 0:
+        return "0KB"
+    kb_size = bytesize / 1024
+    if kb_size < 1024:
+        return f"{kb_size:.0f}KB"
+    return f"{kb_size / 1024:.2f}MB"
 
 
 def ensure_banner(folder_path, image_files, banner_size=(720, 405), title="Default Banner"):

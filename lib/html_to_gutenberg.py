@@ -1,12 +1,13 @@
-from bs4 import BeautifulSoup, NavigableString, Comment
+from bs4 import BeautifulSoup, NavigableString, Comment, Tag
+from typing import Union
 
 
-def _wrap_in_gutenberg_comments(element):
+def _wrap_in_gutenberg_comments(element: Union[Tag, NavigableString, Comment]) -> str:
     if isinstance(element, (NavigableString, Comment)):
         return str(element)
     if element.name == "p":
         return _wrap_paragraph(element)
-    if element.name.startswith("h"):
+    if element.name and element.name.startswith("h"):
         return _wrap_heading(element)
     if element.name == "pre":
         return _wrap_pre(element)
@@ -56,12 +57,10 @@ def _wrap_list(element):
     if class_attr:
         params.append(f'"className":"{class_attr}"')
     wp_list_type = f" {{ {', '.join(params)} }}" if params else ""
-    # Wrap <li> in wp:list-item comments
-    soup = BeautifulSoup(str(element), "html.parser")
-    for li in soup.find_all("li"):
+    for li in element.find_all("li"):
         li.insert_before(Comment(" wp:list-item "))
         li.insert_after(Comment(" /wp:list-item "))
-    return f"<!-- wp:list{wp_list_type} -->\n{soup}\n<!-- /wp:list -->"
+    return f"<!-- wp:list{wp_list_type} -->\n{element}\n<!-- /wp:list -->"
 
 
 def _wrap_image(element):
