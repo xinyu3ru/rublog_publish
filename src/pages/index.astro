@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LeftSidebar from '../components/LeftSidebar.astro';
+import RightSidebar from '../components/RightSidebar.astro';
+import Timeline from '../components/Timeline.astro';
+import TagFilter from '../components/TagFilter.astro';
+import Footer from '../components/Footer.astro';
+import SmoothScroll from '../components/SmoothScroll.astro';
+---
+
+<Layout>
+  <SmoothScroll />
+  
+  <LeftSidebar />
+  
+  <main class="main-content">
+    <header style="border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 28px;">
+      <h1 style="font-size: 24px; font-weight: 800; letter-spacing: -0.3px;">
+        <span style="color: var(--blue);">◆</span> Rublog Publish
+      </h1>
+      <p style="font-size: 13.5px; color: var(--text2); margin-top: 6px;">
+        使用 GitHub Actions 自动将 Markdown 发布到 WordPress
+      </p>
+    </header>
+    
+    <TagFilter />
+    <Timeline />
+    <Footer />
+  </main>
+  
+  <RightSidebar />
+</Layout>

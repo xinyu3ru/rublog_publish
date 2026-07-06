@@ -1,0 +1,143 @@
+---
+import articles from '../data/articles.json';
+
+// 生成搜索索引
+const searchIndex = articles.map(a => ({
+  title: a.title,
+  slug: a.slug,
+  date: a.date,
+  url: a.url
+}));
+---
+
+<div style="
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+">
+  <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px;">
+    🔍 搜索文章
+  </div>
+  
+  <div style="position:relative;">
+    <input
+      type="text"
+      id="search-input"
+      placeholder="输入关键词..."
+      style="
+        width: 100%;
+        padding: 10px 12px 10px 36px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg2);
+        color: var(--text);
+        font-size: 13px;
+        outline: none;
+        transition: all 0.2s;
+      "
+      onfocus="this.style.borderColor='var(--blue)'; this.style.boxShadow='0 0 0 3px rgba(56,139,253,0.1)'"
+      onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none'"
+    />
+    <svg 
+      style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text2);"
+      width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    >
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+  </div>
+  
+  {/* 搜索结果下拉框 */}
+  <div 
+    id="search-results"
+    style="
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-top: 4px;
+      max-height: 300px;
+      overflow-y: auto;
+      z-index: 1000;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    "
+  ></div>
+</div>
+
+<script define:vars={{ searchIndex }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('search-input');
+    const results = document.getElementById('search-results');
+    
+    let debounceTimer;
+    
+    input.addEventListener('input', (e) => {
+      clearTimeout(debounceTimer);
+      const query = e.target.value.trim().toLowerCase();
+      
+      if (query.length < 2) {
+        results.style.display = 'none';
+        return;
+      }
+      
+      debounceTimer = setTimeout(() => {
+        const filtered = searchIndex.filter(article => 
+          article.title.toLowerCase().includes(query)
+        ).slice(0, 8); // 最多显示8个结果
+        
+        if (filtered.length > 0) {
+          results.innerHTML = filtered.map(article => `
+            <a 
+              href="${article.url}" 
+              target="_blank"
+              style="
+                display: block;
+                padding: 12px;
+                border-bottom: 1px solid var(--border);
+                color: var(--text);
+                text-decoration: none;
+                transition: background 0.15s;
+              "
+              onmouseover="this.style.background='var(--bg2)'"
+              onmouseout="this.style.background='transparent'"
+            >
+              <div style="font-size:13px;font-weight:500;margin-bottom:4px;">
+                ${article.title}
+              </div>
+              <div style="font-size:11px;color:var(--text2);">
+                ${article.date}
+              </div>
+            </a>
+          `).join('');
+          results.style.display = 'block';
+        } else {
+          results.innerHTML = `
+            <div style="padding:16px;text-align:center;color:var(--text2);font-size:13px;">
+              未找到相关文章 😢
+            </div>
+          `;
+          results.style.display = 'block';
+        }
+      }, 300);
+    });
+    
+    // 点击外部关闭搜索结果
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#search-input') && !e.target.closest('#search-results')) {
+        results.style.display = 'none';
+      }
+    });
+    
+    // ESC键关闭
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        results.style.display = 'none';
+        input.blur();
+      }
+    });
+  });
+</script>

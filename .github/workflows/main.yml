@@ -31,7 +31,7 @@ jobs:
           sudo apt install -y pngquant
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
         with:
           enable-cache: true
           cache-dependency-glob: |
@@ -50,6 +50,11 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           HOST: ${{ secrets.HOST }}
         run: uv run python main.py
+
+      # 把生成的 README.md 复制到 Astro 项目的内容目录下
+      - name: Copy README to Astro
+        run: |
+          cp README.md src/content/home/README.md
 
       - name: Commit and push if changed
         uses: stefanzweifel/git-auto-commit-action@v6

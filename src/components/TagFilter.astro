@@ -1,0 +1,55 @@
+---
+import articles from '../data/articles.json';
+const allTags = [...new Set(articles.flatMap(a => a.tags))];
+---
+
+{(allTags.length > 0) && (
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;">
+    <button
+      class="tag-btn"
+      data-tag="all"
+      style="
+        font-size:12px;
+        padding:3px 10px;
+        border-radius:6px;
+        border:1px solid var(--border);
+        background:var(--bg2);
+        color:var(--text2);
+        cursor:pointer;
+      "
+    >
+      全部
+    </button>
+    {allTags.map(t => (
+      <button
+        class="tag-btn"
+        data-tag={t}
+        style="
+          font-size:12px;
+          padding:3px 10px;
+          border-radius:6px;
+          border:1px solid var(--border);
+          background:var(--bg2);
+          color:var(--text2);
+          cursor:pointer;
+        "
+      >
+        {t}
+      </button>
+    ))}
+  </div>
+)}
+
+<script>
+  document.querySelectorAll('.tag-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag;
+      document.querySelectorAll('[data-article]').forEach(el => {
+        el.style.display =
+          tag === 'all' || el.dataset.article.includes(tag)
+            ? ''
+            : 'none';
+      });
+    });
+  });
+</script>

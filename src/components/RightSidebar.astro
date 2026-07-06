@@ -1,0 +1,277 @@
+---
+import articles from '../data/articles.json';
+
+// 计算统计数据
+const totalArticles = articles.length;
+const currentYear = new Date().getFullYear();
+
+// 按年份统计
+const articlesByYear = articles.reduce((acc, article) => {
+  const year = article.date.slice(0, 4);
+  acc[year] = (acc[year] || 0) + 1;
+  return acc;
+}, {});
+
+const recentYears = Object.entries(articlesByYear)
+  .sort((a, b) => b[0] - a[0])
+  .slice(0, 3);
+
+const maxCount = Math.max(...Object.values(articlesByYear));
+---
+
+<aside class="right-sidebar">
+  <!-- 统计卡片 -->
+  <div style="
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+  ">
+    <div style="font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 16px; text-transform: uppercase;">
+      📊 博客统计
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px;">
+      <div style="text-align: center; padding: 8px 4px; background: var(--bg); border-radius: 6px; border: 1px solid var(--border);">
+        <div style="font-size: 18px; font-weight: 700; color: var(--blue); line-height: 1;">
+          {totalArticles}
+        </div>
+        <div style="font-size: 10px; color: var(--text2); margin-top: 4px;">
+          文章总数
+        </div>
+      </div>
+      <div style="text-align: center; padding: 8px 4px; background: var(--bg); border-radius: 6px; border: 1px solid var(--border);">
+        <div style="font-size: 18px; font-weight: 700; color: var(--blue); line-height: 1;">
+          {currentYear}
+        </div>
+        <div style="font-size: 10px; color: var(--text2); margin-top: 4px;">
+          当前年份
+        </div>
+      </div>
+      <div style="text-align: center; padding: 8px 4px; background: var(--bg); border-radius: 6px; border: 1px solid var(--border);">
+        <div style="font-size: 18px; font-weight: 700; color: var(--blue); line-height: 1;">
+          {recentYears[0]?.[1] || 0}
+        </div>
+        <div style="font-size: 10px; color: var(--text2); margin-top: 4px;">
+          今年发文
+        </div>
+      </div>
+    </div>
+    
+    <!-- 年度趋势 -->
+    <div style="border-top: 1px solid var(--border); padding-top: 12px;">
+      <div style="font-size: 11px; color: var(--text2); margin-bottom: 10px; display: flex; align-items: center; gap: 4px;">
+        <span>📅</span>
+        <span>年度发文趋势</span>
+      </div>
+      {recentYears.map(([year, count]) => (
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span style="font-size: 12px; color: var(--text);">{year}</span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="
+              width: 60px;
+              height: 6px;
+              background: var(--bg);
+              border-radius: 3px;
+              overflow: hidden;
+            ">
+              <div style="
+                width: {(count / maxCount) * 100}%;
+                height: 100%;
+                background: linear-gradient(90deg, var(--blue), #3b82f6);
+                border-radius: 3px;
+                transition: width 0.3s ease;
+              "></div>
+            </div>
+            <span style="
+              font-size: 11px;
+              background: rgba(56, 139, 253, 0.15);
+              color: var(--blue);
+              padding: 2px 8px;
+              border-radius: 10px;
+              font-weight: 500;
+              min-width: 32px;
+              text-align: center;
+            ">
+              {count}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- 文章目录 -->
+  <div style="
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    height: calc(100vh - 380px); /* ✅ 固定高度，启用滚动 */
+    overflow-y: auto; /* ✅ 美化过的滚动条 */
+  ">
+    <div style="font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 12px; text-transform: uppercase;">
+      📚 文章目录
+    </div>
+    
+    <nav>
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px;">
+        {articles.map(a => (
+          <li>
+            <a
+              href={`#${a.slug}`}
+              data-slug={a.slug}
+              class="toc-link"
+              style="
+                display: block;
+                font-size: 13px;
+                line-height: 1.4;
+                color: var(--text);
+                word-break: break-word;
+                padding: 8px 12px;
+                border-radius: 6px;
+                transition: all 0.15s;
+                border-left: 3px solid transparent;
+                background: transparent;
+              "
+              onmouseenter="this.style.background='rgba(56,139,253,0.1)'; this.style.borderLeftColor='var(--blue)'"
+              onmouseleave="this.style.background='transparent'; this.style.borderLeftColor='transparent'"
+            >
+              <div style="font-weight: 500; margin-bottom: 2px;">
+                {a.title}
+              </div>
+              <div style="font-size: 11px; color: var(--text2); display: flex; align-items: center; gap: 6px;">
+                <span>📅 {a.date}</span>
+                {a.tags && a.tags.length > 0 && (
+                  <span style="
+                    background: var(--bg);
+                    padding: 1px 6px;
+                    border-radius: 10px;
+                    font-size: 10px;
+                    border: 1px solid var(--border);
+                  ">
+                    {a.tags[0]}
+                  </span>
+                )}
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+
+  <!-- 快速操作 -->
+  <div style="
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 20px;
+  ">
+    <div style="font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 12px; text-transform: uppercase;">
+      ⚡ 快速操作
+    </div>
+    
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <a
+        href="https://github.com/xinyu3ru/rublog_publish/new/main/need_post"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 12px;
+          border-radius: 8px;
+          background: var(--bg);
+          border: 1px solid var(--border);
+          color: var(--text);
+          font-size: 13px;
+          text-decoration: none;
+          transition: all 0.2s;
+        "
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+        </svg>
+        新建文章
+      </a>
+      
+      <a
+        href="https://rxx0.com/feed"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 12px;
+          border-radius: 8px;
+          background: var(--bg);
+          border: 1px solid var(--border);
+          color: var(--text);
+          font-size: 13px;
+          text-decoration: none;
+          transition: all 0.2s;
+        "
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 11a9 9 0 0 1 9 9"></path>
+          <path d="M4 4a16 16 0 0 1 16 16"></path>
+          <circle cx="5" cy="19" r="1"></circle>
+        </svg>
+        RSS 订阅
+      </a>
+      
+      <button
+        id="copy-current-url"
+        style="
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 12px;
+          border-radius: 8px;
+          background: var(--bg);
+          border: 1px solid var(--border);
+          color: var(--text);
+          font-size: 13px;
+          cursor: pointer;
+          width: 100%;
+          transition: all 0.2s;
+        "
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        复制当前链接
+      </button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const copyUrlBtn = document.getElementById('copy-current-url');
+      
+      copyUrlBtn?.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          const originalText = copyUrlBtn.innerHTML;
+          copyUrlBtn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            已复制！
+          `;
+          setTimeout(() => {
+            copyUrlBtn.innerHTML = originalText;
+          }, 2000);
+        } catch (err) {
+          console.error('复制失败:', err);
+        }
+      });
+    });
+  </script>
+</aside>

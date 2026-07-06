@@ -1,0 +1,15 @@
+<script is:inline>
+  requestAnimationFrame(() => {
+    document.querySelectorAll('aside a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (!id?.startsWith('#')) return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        window.scrollTo({ top: el.offsetTop - 72, behavior: 'smooth' });
+        history.replaceState(null, '', id);
+      });
+    });
+  });
+</script>

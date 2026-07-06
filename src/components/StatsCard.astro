@@ -1,0 +1,80 @@
+---
+import articles from '../data/articles.json';
+
+// 计算统计数据
+const totalArticles = articles.length;
+const categories = [...new Set(articles.flatMap(a => a.categories || []))];
+const tags = [...new Set(articles.flatMap(a => a.tags || []))];
+
+// 按年份统计
+const articlesByYear = articles.reduce((acc, article) => {
+  const year = article.date.slice(0, 4);
+  acc[year] = (acc[year] || 0) + 1;
+  return acc;
+}, {});
+
+const recentYears = Object.entries(articlesByYear)
+  .sort((a, b) => b[0] - a[0])
+  .slice(0, 3);
+---
+
+<div style="
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+">
+  <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:16px;text-transform:uppercase;">
+    📊 博客统计
+  </div>
+  
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
+    <div style="text-align:center;">
+      <div style="font-size:20px;font-weight:700;color:var(--blue);">
+        {totalArticles}
+      </div>
+      <div style="font-size:11px;color:var(--text2);margin-top:2px;">
+        文章总数
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:20px;font-weight:700;color:var(--blue);">
+        {categories.length}
+      </div>
+      <div style="font-size:11px;color:var(--text2);margin-top:2px;">
+        分类数量
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:20px;font-weight:700;color:var(--blue);">
+        {tags.length}
+      </div>
+      <div style="font-size:11px;color:var(--text2);margin-top:2px;">
+        标签数量
+      </div>
+    </div>
+  </div>
+  
+  {/* 最近年份统计 */}
+  <div style="border-top:1px solid var(--border);padding-top:12px;">
+    <div style="font-size:11px;color:var(--text2);margin-bottom:8px;">
+      年度发文
+    </div>
+    {recentYears.map(([year, count]) => (
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-size:12px;color:var(--text);">{year}</span>
+        <span style="
+          font-size:11px;
+          background:rgba(56,139,253,0.15);
+          color:var(--blue);
+          padding:2px 8px;
+          border-radius:10px;
+          font-weight:500;
+        ">
+          {count} 篇
+        </span>
+      </div>
+    ))}
+  </div>
+</div>

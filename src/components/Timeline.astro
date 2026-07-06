@@ -1,0 +1,74 @@
+---
+import articles from '../data/articles.json';
+
+const grouped = articles.reduce((acc, a) => {
+  const y = a.date.slice(0, 4);
+  (acc[y] ??= []).push(a);
+  return acc;
+}, {});
+const years = Object.keys(grouped).sort((a, b) => b - a);
+---
+
+<section style="margin-top:8px;">
+  {years.map(year => (
+    <div key={year} style="margin-bottom:32px;">
+      <div style="
+        font-size:14px;
+        font-weight:700;
+        color:'#58a6ff';
+        padding-bottom:8px;
+        margin-bottom:12px;
+        border-bottom:1px solid var(--border);
+      ">
+        🗓️ {year}
+      </div>
+
+      <div style="position:relative;border-left:2px solid var(--border);margin-left:6px;">
+        {grouped[year]
+          .sort((a, b) => (b.date > a.date ? 1 : -1))
+          .map(a => (
+            <div
+              id={a.slug}   /* ✅ 只用于锚点，不用于跳转 */
+              key={a.slug}
+              style="
+                position:relative;
+                margin-bottom:16px;
+                padding-left:18px;
+                scroll-margin-top:80px;
+              "
+            >
+              {/* 圆点 */}
+              <div style="
+                position:absolute;
+                left:-9px;
+                top:6px;
+                width:10px;height:10px;
+                background:var(--blue);
+                border:2px solid var(--bg);
+                border-radius:50%;
+                box-shadow:0 0 0 2px var(--border);
+              "/>
+
+              <div style="font-size:12px;color:var(--text2);font-family:var(--mono);margin-bottom:2px;">
+                {a.date}
+              </div>
+
+              {/* ✅ 标题直接跳外链 */}
+              <div style="font-size:14.5px;font-weight:600;line-height:1.5;">
+                <a
+                  href={a.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style="color:#e6edf3;"
+                  onmouseenter="this.style.color='#58a6ff'"
+                  onmouseleave="this.style.color='#e6edf3'"
+                >
+                  {a.title} ↗
+                </a>
+              </div>
+            </div>
+          ))}
+      </div>
+    </div>
+  ))}
+</section>
