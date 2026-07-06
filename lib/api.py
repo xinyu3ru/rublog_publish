@@ -657,12 +657,23 @@ class Wordpress(object):
         )
 
 
+    def create_tag(self, name: str) -> int:
+        response = self.session.post(
+            f"{self.url}/tags",
+            json={"name": name},
+            auth=self.auth,
+            headers=self.headers,
+        )
+        if response.status_code not in [200, 201]:
+            raise Exception(f"Failed to create tag '{name}': {response.text}")
+        tag_data = response.json()
+        self.tags.fget.cache_clear()
+        return tag_data["id"]
+
     def get_tag_id_by_name(self, tag: str) -> str:
         if tag in self.tags:
-            return self.tags[tag]
+            return str(self.tags[tag])
 
-        raise ValueError(
-            "invalid tag '{}' try one of\n {}".format(
-                tag, ",\n ".join(self.tags.keys())
-            )
-        )
+        logging.info(f"Tag '{tag}' not found, creating new tag")
+        tag_id = self.create_tag(tag)
+        return str(tag_id)
