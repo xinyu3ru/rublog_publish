@@ -674,6 +674,11 @@ class Wordpress(object):
         if tag in self.tags:
             return str(self.tags[tag])
 
+        import re
+        tag_slug = re.sub(r'[^a-z0-9]+', '-', tag.lower()).strip('-')
+        if tag_slug in self.tags:
+            return str(self.tags[tag_slug])
+
         logging.info(f"Tag '{tag}' not found, creating new tag")
         tag_id = self.create_tag(tag)
         return str(tag_id)
