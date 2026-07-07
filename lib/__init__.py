@@ -1,4 +1,5 @@
 from lib.api import Wordpress, WordpressEndpoint, Post, Medium, User, PermissionDenied, ApiError
+from lib.api_async import AsyncWordpress
 from lib.blog import Blog
 from lib.upload import upload_post, upsert_post
 from lib.compress import compress_pic, compress_jpg, compress_png
@@ -16,6 +17,7 @@ __all__ = [
     "User",
     "PermissionDenied",
     "ApiError",
+    "AsyncWordpress",
     "Blog",
     "upload_post",
     "upsert_post",
