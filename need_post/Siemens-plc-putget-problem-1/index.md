@@ -9,8 +9,8 @@ og:
   image: images/og-banner.jpg
 status: publish
 title: 西门子 S7-1500 1200 PUT/GET 通信错误问题一则
-focus-keywords: 
-tags: 
+focus-keywords: PLC
+tags: PLC
 ---
 
 # 西门子 S7-1500 1200 PUT/GET 通信错误问题一则
