@@ -277,6 +277,19 @@ class Wordpress(object):
     def is_host_for(self, url: Union[str, ParseResult]) -> bool:
         return self.endpoint.is_host_for(url)
 
+    def _request_with_retry(self, method: str, url: str, **kwargs) -> requests.Response:
+        auth = kwargs.pop('auth', self.auth)
+        headers = kwargs.pop('headers', self.headers.copy())
+        
+        response = self.session.request(method, url, auth=auth, headers=headers, **kwargs)
+        
+        if response.status_code == 401 and auth is not None:
+            headers_with_auth = headers.copy()
+            headers_with_auth["Authorization"] = self.basic_auth_header
+            response = self.session.request(method, url, headers=headers_with_auth, **kwargs)
+        
+        return response
+
     def get_all(self, resource: str, query: dict = None) -> Iterator[dict]:
         params = query.copy() if query else {}
         params["per_page"] = "100"
@@ -336,6 +349,7 @@ class Wordpress(object):
         try:
             user = self.get_user_by_id("me")
             if user and user.name == name:
+                logging.info(f"Current user matches author '{name}', id={user.id}")
                 return user
         except (PermissionDenied, Exception):
             logging.warning("Unable to get current user info, trying Basic Auth Header")
@@ -349,52 +363,13 @@ class Wordpress(object):
                 if response.status_code == 200:
                     user = User(response.json())
                     if user and user.name == name:
+                        logging.info(f"Current user matches author '{name}', id={user.id}")
                         return user
             except (PermissionDenied, Exception):
                 pass
 
-        users = []
-        try:
-            users = self.users({"search": name, "context": "edit"})
-        except PermissionDenied:
-            logging.warning("Permission denied to read user email addresses")
-            users = self.users({"search": name})
-
-        if len(users) == 0:
-            logging.warning(f"No user found for author '{name}', skipping author assignment")
-            return None
-        elif len(users) == 1:
-            logging.info(f"Found author '{name}' with id {users[0].id}")
-            return users[0]
-
-        if user := next(
-            filter(
-                lambda u: (author_id and u.slug == author_id)
-                or (
-                    not author_id
-                    and email
-                    and u.email
-                    and u.email.lower() == email.lower()
-                ),
-                users,
-            ),
-            None,
-        ):
-            return user
-
-        candidates = ", ".join(["{} / {}".format(u.slug, u.email) for u in users])
-        if author_id:
-                raise ValueError(
-                f"Multiple authors named '{name}' found, none with author id {author_id} (possible: {candidates})."
-                )
-        elif email:
-            raise ValueError(
-                f"Multiple authors named '{name}' found, but none with email {email}. (possible: {candidates})."
-            )
-        else:
-            raise ValueError(
-                f"Multiple authors named '{name}' found. (possible: {candidates})."
-            )
+        logging.warning(f"Cannot verify author '{name}' matches authenticated user, skipping author assignment")
+        return None
 
     def posts(self, query: dict = None) -> Iterator["Post"]:
         for p in self.get_all("posts", query):
@@ -522,20 +497,11 @@ class Wordpress(object):
                     slug,
                     stored_image.medium_id,
                 )
-                delete_response = self.session.delete(
+                delete_response = self._request_with_retry(
+                    "DELETE",
                     f"{self.url}/media/{stored_image.medium_id}",
-                    auth=self.auth,
-                    headers=self.headers,
                     params={"force": 1},
                 )
-                if delete_response.status_code == 401:
-                    headers_with_auth = self.headers.copy()
-                    headers_with_auth["Authorization"] = self.basic_auth_header
-                    delete_response = self.session.delete(
-                        f"{self.url}/media/{stored_image.medium_id}",
-                        headers=headers_with_auth,
-                        params={"force": 1},
-                    )
                 if delete_response.status_code not in [200, 201, 202]:
                     raise Exception(delete_response.text)
 
@@ -547,35 +513,20 @@ class Wordpress(object):
                 "Content-Type": mimetypes.guess_type(path)[0],
             }
 
-            response = self.session.post(
+            response = self._request_with_retry(
+                "POST",
                 f"{self.url}/media/",
                 data=content,
-                auth=self.auth,
                 headers=headers,
                 params={
                     "slug": slug,
                     "title": slug,
                 },
             )
-            if response.status_code == 401:
-                headers_with_auth = headers.copy()
-                headers_with_auth["Authorization"] = self.basic_auth_header
-                response = self.session.post(
-                    f"{self.url}/media/",
-                    data=content,
-                    headers=headers_with_auth,
-                    params={
-                        "slug": slug,
-                        "title": slug,
-                    },
-                )
             if response.status_code not in [200, 201]:
                 raise Exception(response.text)
 
             stored_image = Medium(response.json())
-            self.session.patch(
-                f"{self.url}/media/{stored_image.medium_id}",
-            )
 
         self._media[slug] = stored_image
         return self._media[slug]
@@ -596,44 +547,17 @@ class Wordpress(object):
         )
 
     def update_post(self, guid: str, properties: dict):
-        response = self.session.patch(
-            self.normalize_url(guid),
-            json=properties,
-            auth=self.auth,
-            headers=self.headers,
-        )
-        if response.status_code == 401:
-            headers_with_auth = self.headers.copy()
-            headers_with_auth["Authorization"] = self.basic_auth_header
-            response = self.session.patch(
-                self.normalize_url(guid),
-                json=properties,
-                headers=headers_with_auth,
-            )
+        response = self._request_with_retry("PATCH", self.normalize_url(guid), json=properties)
+        
         if response.status_code not in [200, 201]:
             raise Exception(response.text)
         return Post(response.json())
 
     def create_post(self, properties: dict) -> "Post":
-        response = self.session.post(
-            f"{self.url}/posts",
-            json=properties,
-            auth=self.auth,
-            headers=self.headers,
-        )
+        response = self._request_with_retry("POST", f"{self.url}/posts", json=properties)
         
         if response.status_code in [200, 201]:
             return Post(response.json())
-        elif response.status_code == 401:
-            headers_with_auth = self.headers.copy()
-            headers_with_auth["Authorization"] = self.basic_auth_header
-            response = self.session.post(
-                f"{self.url}/posts",
-                json=properties,
-                headers=headers_with_auth,
-            )
-            if response.status_code in [200, 201]:
-                return Post(response.json())
         
         raise Exception(response.text)
 
@@ -711,29 +635,12 @@ class Wordpress(object):
 
 
     def create_tag(self, name: str) -> int:
-        response = self.session.post(
-            f"{self.url}/tags",
-            json={"name": name},
-            auth=self.auth,
-            headers=self.headers,
-        )
+        response = self._request_with_retry("POST", f"{self.url}/tags", json={"name": name})
         
         if response.status_code in [200, 201]:
             tag_data = response.json()
             self.tags.fget.cache_clear()
             return tag_data["id"]
-        elif response.status_code == 401:
-            headers_with_auth = self.headers.copy()
-            headers_with_auth["Authorization"] = self.basic_auth_header
-            response = self.session.post(
-                f"{self.url}/tags",
-                json={"name": name},
-                headers=headers_with_auth,
-            )
-            if response.status_code in [200, 201]:
-                tag_data = response.json()
-                self.tags.fget.cache_clear()
-                return tag_data["id"]
         
         raise Exception(f"Failed to create tag '{name}': {response.text}")
 
