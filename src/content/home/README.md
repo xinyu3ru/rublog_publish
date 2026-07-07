@@ -12,6 +12,8 @@ WordPress API 库来自于 [wordpress-markdown-blog-loader](https://github.com/b
 
 ## 目录(2026年07月07日更新)
 
+[对比起 Trae](https://www.rxx0.com/?p=5947)&emsp; &emsp; 发布时间： 2026-07-07-10:00
+
 [西门子 S7-1500 1200 PUT/GET 通信错误问题一则](https://www.rxx0.com/jinzhan/xi-men-zi-s7-1500-1200-pu.html)&emsp; &emsp; 发布时间： 2026-07-07-09:42
 
 [在使用 AI 编程过程中词元的燃烧速度](https://www.rxx0.com/software/zai-shi-yong-ai-bian-chen.html)&emsp; &emsp; 发布时间： 2026-06-02-01:08

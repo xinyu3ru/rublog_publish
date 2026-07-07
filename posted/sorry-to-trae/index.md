@@ -3,14 +3,16 @@ author: xinyu2ru
 categories:
 - jinzhan
 date: 2026-07-07 18:20:00
+excerpt: 对比起 Trae
+focus-keywords: AI
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/5947
 image: images/banner.jpg
 og:
   image: images/og-banner.jpg
+slug: dui-bi-qi-trae
 status: publish
 tags: AI
-focus-keywords: AI
-title: 对比起 Trae 
-excerpt: 对比起 Trae 
+title: 对比起 Trae
 ---
 
 # 对比起 Trae 
