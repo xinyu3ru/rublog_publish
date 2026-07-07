@@ -281,9 +281,12 @@ class Wordpress(object):
         auth = kwargs.pop('auth', self.auth)
         headers = kwargs.pop('headers', self.headers.copy())
         
+        logging.debug(f"Request: {method} {url}, auth_set: {auth is not None}, username_set: {self.endpoint.username is not None}, password_set: {self.endpoint.password is not None}")
+        
         response = self.session.request(method, url, auth=auth, headers=headers, **kwargs)
         
         if response.status_code == 401 and auth is not None:
+            logging.debug(f"401 received, trying Basic Auth Header")
             headers_with_auth = headers.copy()
             headers_with_auth["Authorization"] = self.basic_auth_header
             response = self.session.request(method, url, headers=headers_with_auth, **kwargs)
