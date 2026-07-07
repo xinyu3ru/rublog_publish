@@ -398,7 +398,7 @@ class Blog(object):
             "format": "standard",
             "status": self.status,
             "categories": [wp.get_category_id_by_name(c) for c in (self.categories or [])],
-            "tags": [wp.get_tag_id_by_name(c) for c in (self.tags or [])],
+            "tags": [tag_id for tag_id in [wp.get_tag_id_by_name(c) for c in (self.tags or [])] if tag_id is not None],
             "acf": {"show_header_image": bool(self.image)},
             "industries_taxonomy": [wp.get_industry_by_name(c) for c in (self.industries or [])],
             "partners_taxonomy": [wp.get_partner_by_name(c) for c in (self.partners or [])],

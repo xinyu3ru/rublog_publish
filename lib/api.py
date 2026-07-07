@@ -653,7 +653,7 @@ class Wordpress(object):
         
         raise Exception(f"Failed to create tag '{name}': {response.text}")
 
-    def get_tag_id_by_name(self, tag: str) -> str:
+    def get_tag_id_by_name(self, tag: str) -> Optional[str]:
         if tag in self.tags:
             return str(self.tags[tag])
 
@@ -663,5 +663,9 @@ class Wordpress(object):
             return str(self.tags[tag_slug])
 
         logging.info(f"Tag '{tag}' not found, creating new tag")
-        tag_id = self.create_tag(tag)
-        return str(tag_id)
+        try:
+            tag_id = self.create_tag(tag)
+            return str(tag_id)
+        except Exception as e:
+            logging.warning(f"Failed to create tag '{tag}': {e}. Skipping this tag.")
+            return None
