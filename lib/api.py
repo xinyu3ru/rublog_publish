@@ -331,26 +331,25 @@ class Wordpress(object):
 
     def get_unique_user_by_name(
         self, name: str, email: Optional[str], author_id: Optional[str]
-    ) -> "User":
+    ) -> Optional["User"]:
 
         try:
             user = self.get_user_by_id("me")
             if user and user.name == name:
                 return user
         except (PermissionDenied, Exception):
-            logging.warning("Unable to get current user info, searching by name")
+            logging.warning("Unable to get current user info, skipping author assignment")
+            return None
 
         users = []
         try:
-            # The email field is only returned when the context edit is passed.
-            # See: https://developer.wordpress.org/rest-api/reference/users/
             users = self.users({"search": name, "context": "edit"})
         except PermissionDenied:
             logging.warning("Permission denied to read user email addresses")
             users = self.users({"search": name})
 
         if len(users) == 0:
-            raise ValueError(f"author '{name}' not found on {self.endpoint.host}")
+            return None
         elif len(users) == 1:
             return users[0]
 

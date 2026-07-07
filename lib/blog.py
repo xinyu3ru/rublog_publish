@@ -392,7 +392,6 @@ class Blog(object):
         result = {
             "title": self.title,
             "slug": self.slug,
-            "author": author.id,
             "date": self.date.isoformat(),
             "date_gmt": self.date.astimezone(pytz.UTC).isoformat(),
             "content": self.rendered,
@@ -405,6 +404,8 @@ class Blog(object):
             "partners_taxonomy": [wp.get_partner_by_name(c) for c in (self.partners or [])],
             "capabilities": [wp.get_capabilities_by_name(c) for c in (self.capabilities or [])],
         }
+        if author:
+            result["author"] = author.id
         if self.permalink_template:
             result["permalink_template"] = self.permalink_template
 
