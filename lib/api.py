@@ -580,9 +580,21 @@ class Wordpress(object):
             auth=self.auth,
             headers=self.headers,
         )
-        if response.status_code not in [200, 201]:
-            raise Exception(response.text)
-        return Post(response.json())
+        
+        if response.status_code in [200, 201]:
+            return Post(response.json())
+        elif response.status_code == 401:
+            headers_with_auth = self.headers.copy()
+            headers_with_auth["Authorization"] = self.basic_auth_header
+            response = self.session.post(
+                f"{self.url}/posts",
+                json=properties,
+                headers=headers_with_auth,
+            )
+            if response.status_code in [200, 201]:
+                return Post(response.json())
+        
+        raise Exception(response.text)
 
     def get_resource_by_url(self, url: str, params: dict = {}) -> Optional[dict]:
         response = self.session.get(
@@ -664,11 +676,25 @@ class Wordpress(object):
             auth=self.auth,
             headers=self.headers,
         )
-        if response.status_code not in [200, 201]:
-            raise Exception(f"Failed to create tag '{name}': {response.text}")
-        tag_data = response.json()
-        self.tags.fget.cache_clear()
-        return tag_data["id"]
+        
+        if response.status_code in [200, 201]:
+            tag_data = response.json()
+            self.tags.fget.cache_clear()
+            return tag_data["id"]
+        elif response.status_code == 401:
+            headers_with_auth = self.headers.copy()
+            headers_with_auth["Authorization"] = self.basic_auth_header
+            response = self.session.post(
+                f"{self.url}/tags",
+                json={"name": name},
+                headers=headers_with_auth,
+            )
+            if response.status_code in [200, 201]:
+                tag_data = response.json()
+                self.tags.fget.cache_clear()
+                return tag_data["id"]
+        
+        raise Exception(f"Failed to create tag '{name}': {response.text}")
 
     def get_tag_id_by_name(self, tag: str) -> str:
         if tag in self.tags:
