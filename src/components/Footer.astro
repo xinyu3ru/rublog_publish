@@ -52,8 +52,10 @@ const currentYear = new Date().getFullYear();
           {[
             { name: '所有文章', url: 'https://rxx0.com' },
             { name: '关于我', url: 'https://rxx0.com/about' },
-            { name: '友情链接', url: 'https://rxx0.com/links' },
-            { name: 'RSS订阅', url: 'https://rxx0.com/feed' }
+            { name: '友情链接', url: 'https://www.kefuxx.com/tools' },
+            { name: 'xlsx2vcf转换器', url: 'https://xlsx2vcf.kefuxx.com/' },
+            { name: 'PLC exporter', url: 'https://exporter.kefuxx.com/' },
+            { name: '罩杯计算器', url: 'https://bra.kefuxx.com/' }
           ].map(link => (
             <li>
               <a 
@@ -76,7 +78,7 @@ const currentYear = new Date().getFullYear();
           ⚡ 技术栈
         </h3>
         <div style="display:flex;flex-wrap:wrap;gap:6px;">
-          {['Astro v6', 'GitHub Actions', 'TypeScript', 'Bun', 'WordPress REST API'].map(tech => (
+          {['Astro v6', 'GitHub Actions', 'TypeScript', 'Python', 'WordPress REST API'].map(tech => (
             <span style="
               font-size:11px;
               background:var(--bg);

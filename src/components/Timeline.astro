@@ -15,7 +15,7 @@ const years = Object.keys(grouped).sort((a, b) => b - a);
       <div style="
         font-size:14px;
         font-weight:700;
-        color:'#58a6ff';
+        color:var(--blue);
         padding-bottom:8px;
         margin-bottom:12px;
         border-bottom:1px solid var(--border);
@@ -59,9 +59,9 @@ const years = Object.keys(grouped).sort((a, b) => b - a);
                   href={a.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style="color:#e6edf3;"
-                  onmouseenter="this.style.color='#58a6ff'"
-                  onmouseleave="this.style.color='#e6edf3'"
+                  style="color:var(--text);"
+                  onmouseenter="this.style.color='var(--blue)'"
+                  onmouseleave="this.style.color='var(--text)'"
                 >
                   {a.title} ↗
                 </a>

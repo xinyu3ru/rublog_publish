@@ -113,8 +113,9 @@ import SearchBox from './SearchBox.astro';
     </div>
       <!-- ✅ 确保按钮调用全局函数 -->
       <button
+        id="theme-toggle-btn"
         class="theme-toggle"
-        onclick="toggleTheme()"
+        onclick="toggleThemeAndUpdateBtn()"
         style="
           width: 100%;
           padding: 10px;
@@ -132,7 +133,13 @@ import SearchBox from './SearchBox.astro';
   </div>
 
   <script>
-    function toggleTheme() {
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('theme-toggle-btn');
+      const isDark = document.documentElement.classList.contains('dark');
+      btn.textContent = isDark ? '☀️ 日间模式' : '🌙 夜间模式';
+    });
+
+    function toggleThemeAndUpdateBtn() {
       const html = document.documentElement;
       const isDark = html.classList.contains('dark');
       const newTheme = isDark ? 'light' : 'dark';
@@ -140,6 +147,9 @@ import SearchBox from './SearchBox.astro';
       html.classList.remove(isDark ? 'dark' : 'light');
       html.classList.add(newTheme);
       localStorage.setItem('theme', newTheme);
+      
+      const btn = document.getElementById('theme-toggle-btn');
+      btn.textContent = newTheme === 'dark' ? '☀️ 日间模式' : '🌙 夜间模式';
     }
   </script>
 </aside>

@@ -3,19 +3,17 @@ author: xinyu2ru
 categories:
 - jinzhan
 date: 2026-07-07 18:20:00
-excerpt: 对比起 Trae
-focus-keywords: AI
-guid: https://www.rxx0.com/wp-json/wp/v2/posts/5947
 image: images/banner.jpg
 og:
   image: images/og-banner.jpg
-slug: dui-bi-qi-trae
 status: publish
 tags: AI
-title: 对比起 Trae
+focus-keywords: AI
+title: 对不起 Trae 
+excerpt: 对不起 Trae 
 ---
 
-# 对比起 Trae 
+# 对不起 Trae 
 
 我使用 github 推送 md 文档到 WordPress 发布文章。
 
@@ -33,6 +31,6 @@ title: 对比起 Trae
 
 运行 actions 发布，哈哈，发布成功了。
 
-对比起， Trae 这么了你一天多，竟然是因为没有授权密码。不是你代码修改的不好，也不是你找不到原因
+对不起 Trae 这么了你一天多，竟然是因为没有授权密码。不是你代码修改的不好，也不是你找不到原因
 
 是我的错，真的对不起~

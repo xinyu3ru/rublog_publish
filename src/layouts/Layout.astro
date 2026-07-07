@@ -72,13 +72,13 @@ const { title = 'Rublog Publish' } = Astro.props;
       flex: 1;
       min-width: 0;
       padding: 32px 40px;
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
     }
     
-    /* ✅ 右侧边栏 - 调窄到 220px */
+    /* ✅ 右侧边栏 - 调窄到 180px */
     .right-sidebar {
-      width: 220px; /* ✅ 这里调窄 */
+      width: 180px; /* ✅ 这里调窄 */
       flex-shrink: 0;
       position: sticky;
       top: 24px;
@@ -135,22 +135,10 @@ const { title = 'Rublog Publish' } = Astro.props;
   </div>
   
   <script>
-    // ✅ 初始化主题
     document.addEventListener('DOMContentLoaded', () => {
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.className = savedTheme;
     });
-
-    // ✅ 全局切换函数
-    function toggleTheme() {
-      const html = document.documentElement;
-      const isDark = html.classList.contains('dark');
-      const newTheme = isDark ? 'light' : 'dark';
-      
-      html.classList.remove(isDark ? 'dark' : 'light');
-      html.classList.add(newTheme);
-      localStorage.setItem('theme', newTheme);
-    }
   </script>
 </body>
 </html>
