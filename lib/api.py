@@ -338,7 +338,7 @@ class Wordpress(object):
             if user and user.name == name:
                 return user
         except (PermissionDenied, Exception):
-            logging.warning("Unable to get current user info with auth param, trying Basic Auth Header")
+            logging.warning("Unable to get current user info, trying Basic Auth Header")
             try:
                 headers_with_auth = self.headers.copy()
                 headers_with_auth["Authorization"] = self.basic_auth_header
@@ -351,8 +351,7 @@ class Wordpress(object):
                     if user and user.name == name:
                         return user
             except (PermissionDenied, Exception):
-                logging.warning("Unable to get current user info with Basic Auth, skipping author assignment")
-                return None
+                pass
 
         users = []
         try:
@@ -362,8 +361,10 @@ class Wordpress(object):
             users = self.users({"search": name})
 
         if len(users) == 0:
+            logging.warning(f"No user found for author '{name}', skipping author assignment")
             return None
         elif len(users) == 1:
+            logging.info(f"Found author '{name}' with id {users[0].id}")
             return users[0]
 
         if user := next(
