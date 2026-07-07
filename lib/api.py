@@ -291,6 +291,12 @@ class Wordpress(object):
             headers_with_auth["Authorization"] = self.basic_auth_header
             response = self.session.request(method, url, headers=headers_with_auth, **kwargs)
         
+        if response.status_code == 401:
+            logging.debug(f"401 again, trying Authorization header with auth param removed")
+            headers_only_auth = headers.copy()
+            headers_only_auth["Authorization"] = self.basic_auth_header
+            response = self.session.request(method, url, headers=headers_only_auth, auth=None, **kwargs)
+        
         return response
 
     def get_all(self, resource: str, query: dict = None) -> Iterator[dict]:
