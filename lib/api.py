@@ -338,8 +338,21 @@ class Wordpress(object):
             if user and user.name == name:
                 return user
         except (PermissionDenied, Exception):
-            logging.warning("Unable to get current user info, skipping author assignment")
-            return None
+            logging.warning("Unable to get current user info with auth param, trying Basic Auth Header")
+            try:
+                headers_with_auth = self.headers.copy()
+                headers_with_auth["Authorization"] = self.basic_auth_header
+                response = self.session.get(
+                    f"{self.url}/users/me",
+                    headers=headers_with_auth,
+                )
+                if response.status_code == 200:
+                    user = User(response.json())
+                    if user and user.name == name:
+                        return user
+            except (PermissionDenied, Exception):
+                logging.warning("Unable to get current user info with Basic Auth, skipping author assignment")
+                return None
 
         users = []
         try:
