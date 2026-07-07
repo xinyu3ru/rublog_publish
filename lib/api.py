@@ -514,6 +514,14 @@ class Wordpress(object):
                     headers=self.headers,
                     params={"force": 1},
                 )
+                if delete_response.status_code == 401:
+                    headers_with_auth = self.headers.copy()
+                    headers_with_auth["Authorization"] = self.basic_auth_header
+                    delete_response = self.session.delete(
+                        f"{self.url}/media/{stored_image.medium_id}",
+                        headers=headers_with_auth,
+                        params={"force": 1},
+                    )
                 if delete_response.status_code not in [200, 201, 202]:
                     raise Exception(delete_response.text)
 
@@ -535,6 +543,18 @@ class Wordpress(object):
                     "title": slug,
                 },
             )
+            if response.status_code == 401:
+                headers_with_auth = headers.copy()
+                headers_with_auth["Authorization"] = self.basic_auth_header
+                response = self.session.post(
+                    f"{self.url}/media/",
+                    data=content,
+                    headers=headers_with_auth,
+                    params={
+                        "slug": slug,
+                        "title": slug,
+                    },
+                )
             if response.status_code not in [200, 201]:
                 raise Exception(response.text)
 
@@ -568,6 +588,14 @@ class Wordpress(object):
             auth=self.auth,
             headers=self.headers,
         )
+        if response.status_code == 401:
+            headers_with_auth = self.headers.copy()
+            headers_with_auth["Authorization"] = self.basic_auth_header
+            response = self.session.patch(
+                self.normalize_url(guid),
+                json=properties,
+                headers=headers_with_auth,
+            )
         if response.status_code not in [200, 201]:
             raise Exception(response.text)
         return Post(response.json())
