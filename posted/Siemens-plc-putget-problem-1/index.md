@@ -4,13 +4,15 @@ categories:
 - jinzhan
 date: 2026-07-06 21:22:00
 excerpt: 西门子 S7-1500 1200 PUT/GET 通信错误问题一则
+focus-keywords: PLC
+guid: https://www.rxx0.com/wp-json/wp/v2/posts/5945
 image: images/banner.jpg
 og:
   image: images/og-banner.jpg
+slug: xi-men-zi-s7-1500-1200-pu
 status: publish
-title: 西门子 S7-1500 1200 PUT/GET 通信错误问题一则
-focus-keywords: PLC
 tags: PLC
+title: 西门子 S7-1500 1200 PUT/GET 通信错误问题一则
 ---
 
 # 西门子 S7-1500 1200 PUT/GET 通信错误问题一则
